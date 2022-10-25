@@ -1,0 +1,21 @@
+{% extends "base.html" %}  
+<!DOCTYPE html>
+<html lang="en"> 
+    {% block content %}
+    
+    <div class="container">
+                <div class="card" style="width: 28rem;">
+                    <img src="{{event.image}}" class="card-img-top" alt="{{event.name}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{event.name}}</a></h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Organiser: {{ event.organiser }}</h6>
+                        <p class="card-text">seats available: {{ event.num_of_seats}}</p> 
+                        <p class="card-text">Date: {{ event.date_of_event}}</p> 
+                    </div>
+                  </div>
+                
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    {% endblock content %}
+</body>
+</html>

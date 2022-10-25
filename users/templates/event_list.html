@@ -1,0 +1,58 @@
+{% extends "base.html" %}  
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block content %}
+
+    <div class="container  overflow-hidden">
+        <h1 class="text-center">Events</h1>
+        <div class="row g-3 ">
+       
+        
+            {% if request.user.is_authenticated %}
+          {%if events %}{% for event in events %}
+          
+          <div class="col-lg-4">
+            <div class="card">
+              <div class="card-body">
+                <img
+                src={{event.image}}
+                class="card-img-top"
+                alt={{event.name}}
+                />
+                <h5 class="card-title"><a href="{% url 'event-detail' event_id=event.id %}">{{event.name}}</a></h5>
+                  <p class="card-text">seats available: {{ event.num_of_seats}}</p> 
+                  <p class="choices">Booking: {{ event.bokkingstatus}}</p> 
+                  <select class="form-select" aria-label="Default select example">
+                    <option selected>Booking Available</option>
+                    <option value="{{ event.bokkingstatus.yes}}">Book</option>
+                    <option value="{{ event.bokkingstatus.no}}">Cancel</option>
+                    
+                  </select>
+                </div>
+              </div>
+          </div>
+          
+          {% endfor %} {% else %}
+          <p>No store items yet!</p>
+          {% endif %}{% else %}
+          <p> You Have to <a class="nav-linl col-1" href="{% url 'signin' %}">Sign in
+          
+        </a> </p>
+          {% endif %}
+        </div>
+        <div>
+          <div>   
+          </div>
+        </div>
+      </div>
+      <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"
+      ></script>
+    </body>
+  </html>
+  {% endblock content %}
+  </body>
+</html>

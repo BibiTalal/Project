@@ -15,7 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from users.views import  create_event, home, create_user, signin_user,signout_user,get_events,get_event
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("home/", home, name="home"),
+    path("signup/",create_user,name="create-user"),
+    path("signout/",signout_user,name="signout"),
+    path("signin/",signin_user,name="signin"),
+    path("events/",get_events,name="event-list"),
+    path("add/event/",create_event,name="create-event"),
+    path("event/<int:event_id>/", get_event, name="event-detail"),
+    path('accounts/login/', auth_views.LoginView.as_view()),
 ]
