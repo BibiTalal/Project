@@ -11,15 +11,14 @@
         
             {% if request.user.is_authenticated %}
           {%if events %}{% for event in events %}
-          
+          {%load static%}
           <div class="col-lg-4">
             <div class="card">
               <div class="card-body">
-                <img
-                src={{event.image}}
-                class="card-img-top"
-                alt={{event.name}}
-                />
+                {% if event.image %}
+                <img class="img-fluid" src="{{ event.image.url }}" alt="{{event.name}}">
+                {% endif %}
+               
                 <h5 class="card-title"><a href="{% url 'event-detail' event_id=event.id %}">{{event.name}}</a></h5>
                   <p class="card-text">seats available: {{ event.num_of_seats}}</p> 
                   <p class="choices">Booking: {{ event.bokkingstatus}}</p> 

@@ -6,8 +6,10 @@
       <main class="bg-light h-100 ">
         <div class="card" >
 
+        {%load static%}
+        <form class="container py-2" action="{% url 'create-event' %}" method="POST" 
+        enctype="multipart/form-data">
         
-        <form class="container py-2" action="{% url 'create-event' %}" method="POST">
             <!-- prettier-ignore -->
             {% csrf_token %}
             {{ form | crispy }}

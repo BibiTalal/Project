@@ -5,7 +5,9 @@
     
     <div class="container">
                 <div class="card" style="width: 28rem;">
-                    <img src="{{event.image}}" class="card-img-top" alt="{{event.name}}">
+                    {% if event.image %}
+                    <img class="img-fluid" src="{{ event.image.url }}" alt="{{event.name}}">
+                    {% endif %}
                     <div class="card-body">
                         <h5 class="card-title">{{event.name}}</a></h5>
                         <h6 class="card-subtitle mb-2 text-muted">Organiser: {{ event.organiser }}</h6>
