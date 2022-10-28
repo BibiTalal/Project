@@ -21,13 +21,7 @@
                
                 <h5 class="card-title"><a href="{% url 'event-detail' event_id=event.id %}">{{event.name}}</a></h5>
                   <p class="card-text">seats available: {{ event.num_of_seats}}</p> 
-                  <p class="choices">Booking: {{ event.bokkingstatus}}</p> 
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected>Booking Available</option>
-                    <option value="{{ event.bokkingstatus.yes}}">Book</option>
-                    <option value="{{ event.bokkingstatus.no}}">Cancel</option>
-                    
-                  </select>
+                  
                 </div>
               </div>
           </div>

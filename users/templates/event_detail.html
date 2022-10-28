@@ -13,6 +13,30 @@
                         <h6 class="card-subtitle mb-2 text-muted">Organiser: {{ event.organiser }}</h6>
                         <p class="card-text">seats available: {{ event.num_of_seats}}</p> 
                         <p class="card-text">Date: {{ event.date_of_event}}</p> 
+                        <label for="{{event.num_of_seats_booked}}">Number of Seats:</label>
+                        <input type="number" id="{{event.num_of_seats_booked}}" value="{{event.num_of_seats_booked}}" min="1" max="{{event.num_of_seats}}"/>
+                        
+                            <div>
+                              <input
+                                type="checkbox"
+                                id="booking_status"
+                                name="booking_status"
+                                value="{{event.booking_status}}"
+                                 />
+                              <label for="{{event.booking_status}}">Confirm booking tickets to event "{{event.name}}"</label>
+                            </div>
+                            <div>
+                              
+                              <form method="POST" action="{% url 'done' done_id=event.id  %}">
+                                <input type="submit"/>
+                                {% csrf_token %}
+                              </form>
+                            </div>
+                          
+                          
+                     
+                    
+                  </select>
                     </div>
                   </div>
                 

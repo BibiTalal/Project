@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path
-from users.views import  create_event, home, create_user, signin_user,signout_user,get_events,get_event
+from users.views import  create_event, home, create_user, signin_user,signout_user,get_events,get_event,done_booking
 from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 
@@ -31,6 +31,7 @@ urlpatterns = [
     path("add/event/",create_event,name="create-event"),
     path("event/<int:event_id>/", get_event, name="event-detail"),
     path('accounts/login/', auth_views.LoginView.as_view()),
+    path("done/<int:done_id>/",done_booking,name="done")
 ]
 
 if settings.DEBUG:

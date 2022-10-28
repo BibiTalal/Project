@@ -1,7 +1,7 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.shortcuts import redirect, render
-from users.forms import SigninForm, Create_userForm
+from users.forms import SigninForm, CreateUserForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from .models import Event
@@ -22,9 +22,9 @@ def home(request: HttpRequest) -> HttpResponse:
 
 
 def create_user(request):
-    form=Create_userForm()
+    form=CreateUserForm()
     if request.method=="POST":
-        form=Create_userForm(request.POST)
+        form=CreateUserForm(request.POST)
         if form.is_valid():
             user=form.save(commit=False)
             user.set_password(user.password)
@@ -71,7 +71,7 @@ def get_events(req):
                 "organiser":event.organiser,
                 "num_of_seats":event.num_of_seats,
                 "date_of_event":event.date_of_event,
-                "bookingstatus":event.bookingstatus,
+                
                 
                 
             }
@@ -110,11 +110,29 @@ def get_event(request, event_id):
             "organiser":event.organiser,
             "num_of_seats":event.num_of_seats,
             "date_of_event":event.date_of_event, 
+            "booking_status":event.booking_status,
+            "num_of_seats_booked":event.num_of_seats_booked,
             }
                 
         
     }
     return render(request, "event_detail.html", context)
+
+
+def done_booking(request, done_id):
+    done = Event.objects.get(id=done_id)
+    # user_count=User.objects.annotate=Count('bookingstatus',filter=Q(bookingstatus="yes"))
+    context = {
+        "done": {
+            "id":done.id,
+            "name": done.name,
+            "date_of_event":done.date_of_event, 
+           
+            }
+                
+        
+    }
+    return render(request, "done.html", context)
 
 
 
