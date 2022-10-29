@@ -6,13 +6,17 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from .models import Event
 from .forms import EventForm
+from django.contrib import messages
 from users import models
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.db.models import Q, Count
-
+from django.contrib.auth.decorators import login_required
+from .forms import UpdateUserForm
+from django.urls import reverse_lazy
+from django.contrib.auth.views import PasswordChangeView
+from django.contrib.messages.views import SuccessMessageMixin
 User=get_user_model()
-
 
 
 
@@ -135,7 +139,28 @@ def done_booking(request, done_id):
     return render(request, "done.html", context)
 
 
+@login_required
+def profile_update(request):
+    if request.method == 'POST':
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        
 
+        if user_form.is_valid():
+            user_form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return redirect(to='profile-update')
+    else:
+        user_form = UpdateUserForm(instance=request.user)
+        
+
+    return render(request, 'profile_update.html', {'user_form': user_form})
+
+
+
+class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
+    template_name = "change_password.html"
+    success_message = "Successfully Changed Your Password"
+    success_url = reverse_lazy('home')
 
 
     

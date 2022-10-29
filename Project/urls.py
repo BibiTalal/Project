@@ -16,9 +16,11 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path
-from users.views import  create_event, home, create_user, signin_user,signout_user,get_events,get_event,done_booking
+from users.views import  create_event, home, create_user, signin_user,signout_user,get_events,get_event,done_booking,profile_update
 from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
+from users.views import ChangePasswordView
+
 
 
 urlpatterns = [
@@ -31,7 +33,9 @@ urlpatterns = [
     path("add/event/",create_event,name="create-event"),
     path("event/<int:event_id>/", get_event, name="event-detail"),
     path('accounts/login/', auth_views.LoginView.as_view()),
-    path("done/<int:done_id>/",done_booking,name="done")
+    path("done/<int:done_id>/",done_booking,name="done"),
+    path("profile/update/",profile_update,name="profile-update"),
+    path("password/change/", ChangePasswordView.as_view(), name="change-password"),
 ]
 
 if settings.DEBUG:

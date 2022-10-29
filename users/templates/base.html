@@ -74,10 +74,14 @@
             
             
             {% if request.user.is_authenticated %}
-            
+             <a class="nav-linl col-2" href="{% url 'profile-update' %}">Update Profile
+              
+            </a>
             <a class="nav-linl" href="{% url 'signout' %}">Sign out
               
             </a>
+           
+
             
             {% else %}
             <form action="{% url 'create-user' %}">

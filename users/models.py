@@ -5,6 +5,7 @@ from email.policy import default
 from unicodedata import category
 from django.contrib.auth import get_user_model
 
+
 User=get_user_model()
 
 class Event(models.Model):
@@ -15,7 +16,7 @@ class Event(models.Model):
     organiser=models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="events")
     num_of_seats=models.IntegerField()
     date_of_event=models.DateField()
-    booking_status = models.BooleanField(null=True)
+    booking_status=models.BooleanField(default="False")
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True) 
     
